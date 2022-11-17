@@ -49,9 +49,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   late DateTime _minDateTime, _maxDateTime;
   int? _currYear, _currMonth, _currDay;
   List<int>? _yearRange, _monthRange, _dayRange;
-  FixedExtentScrollController? _yearScrollCtrl,
-      _monthScrollCtrl,
-      _dayScrollCtrl;
+  FixedExtentScrollController? _yearScrollCtrl, _monthScrollCtrl, _dayScrollCtrl;
 
   late Map<String, FixedExtentScrollController?> _scrollCtrlMap;
   late Map<String, List<int>?> _valueRangeMap;
@@ -61,8 +59,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   // So _lock make sure that month doesn't change from cupertino widget
   // we will handle it manually
   bool _lock = false;
-  _DatePickerWidgetState(
-      DateTime? minDateTime, DateTime? maxDateTime, DateTime? initialDateTime) {
+  _DatePickerWidgetState(DateTime? minDateTime, DateTime? maxDateTime, DateTime? initialDateTime) {
     // handle current selected year、month、day
     DateTime initDateTime = initialDateTime ?? DateTime.now();
     this._currYear = initDateTime.year;
@@ -86,18 +83,11 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     this._currDay = min(max(_dayRange!.first, _currDay!), _dayRange!.last);
 
     // create scroll controller
-    _yearScrollCtrl = FixedExtentScrollController(
-        initialItem: _currYear! - _yearRange!.first);
-    _monthScrollCtrl = FixedExtentScrollController(
-        initialItem: _currMonth! - _monthRange!.first);
-    _dayScrollCtrl =
-        FixedExtentScrollController(initialItem: _currDay! - _dayRange!.first);
+    _yearScrollCtrl = FixedExtentScrollController(initialItem: _currYear! - _yearRange!.first);
+    _monthScrollCtrl = FixedExtentScrollController(initialItem: _currMonth! - _monthRange!.first);
+    _dayScrollCtrl = FixedExtentScrollController(initialItem: _currDay! - _dayRange!.first);
 
-    _scrollCtrlMap = {
-      'y': _yearScrollCtrl,
-      'M': _monthScrollCtrl,
-      'd': _dayScrollCtrl
-    };
+    _scrollCtrlMap = {'y': _yearScrollCtrl, 'M': _monthScrollCtrl, 'd': _dayScrollCtrl};
     _valueRangeMap = {'y': _yearRange, 'M': _monthRange, 'd': _dayRange};
   }
 
@@ -106,8 +96,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     return Container(
       //padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0),
       child: GestureDetector(
-        child: Material(
-            color: Colors.transparent, child: _renderPickerView(context)),
+        child: Material(color: Colors.transparent, child: _renderPickerView(context)),
       ),
     );
   }
@@ -152,8 +141,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   /// render the picker widget of year、month and day
   Widget _renderDatePickerWidget() {
     List<Widget> pickers = [];
-    List<String> formatArr =
-        DateTimeFormatter.splitDateFormat(widget.dateFormat);
+    List<String> formatArr = DateTimeFormatter.splitDateFormat(widget.dateFormat);
     formatArr.forEach((format) {
       List<int> valueRange = _findPickerItemRange(format)!;
 
@@ -176,12 +164,10 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
               _changeDaySelection(value);
             }
           },
-          fontSize: widget.pickerTheme!.itemTextStyle.fontSize ??
-              sizeByFormat(widget.dateFormat!));
+          fontSize: widget.pickerTheme!.itemTextStyle.fontSize ?? sizeByFormat(widget.dateFormat!));
       pickers.add(pickerColumn);
     });
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: pickers);
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: pickers);
   }
 
   Widget _renderDatePickerColumnComponent(
@@ -199,8 +185,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 7, vertical: 18),
               height: widget.pickerTheme!.pickerHeight,
-              decoration:
-                  BoxDecoration(color: widget.pickerTheme!.backgroundColor),
+              decoration: BoxDecoration(color: widget.pickerTheme!.backgroundColor),
               child: CupertinoPicker(
                 selectionOverlay: Container(),
                 backgroundColor: widget.pickerTheme!.backgroundColor,
@@ -230,14 +215,14 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-                    Expanded(
-                      child: Divider(
-                        color: widget.pickerTheme!.dividerColor ??
-                            widget.pickerTheme!.itemTextStyle.color,
-                        height: 1,
-                        thickness: 2,
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: Divider(
+                    //     color: widget.pickerTheme!.dividerColor ??
+                    //         widget.pickerTheme!.itemTextStyle.color,
+                    //     height: 1,
+                    //     thickness: 2,
+                    //   ),
+                    // ),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02)
                   ],
                 )),
@@ -249,14 +234,14 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-                    Expanded(
-                      child: Divider(
-                        color: widget.pickerTheme!.dividerColor ??
-                            widget.pickerTheme!.itemTextStyle.color,
-                        height: 1,
-                        thickness: 2,
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: Divider(
+                    //     color: widget.pickerTheme!.dividerColor ??
+                    //         widget.pickerTheme!.itemTextStyle.color,
+                    //     height: 1,
+                    //     thickness: 1,
+                    //   ),
+                    // ),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                   ],
                 )),
@@ -273,8 +258,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     return DATETIME_PICKER_ITEM_TEXT_SIZE_BIG;
   }
 
-  Widget _renderDatePickerItemComponent(
-      int value, String format, double? fontSize) {
+  Widget _renderDatePickerItemComponent(int value, String format, double? fontSize) {
     var weekday = DateTime(_currYear!, _currMonth!, value).weekday;
 
     return Container(
@@ -287,8 +271,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         //     color: widget.pickerTheme!.itemTextStyle.color,
         //     fontSize: fontSize ?? widget.pickerTheme!.itemTextStyle.fontSize
         // ),
-        style: widget.pickerTheme?.itemTextStyle ??
-            DATETIME_PICKER_ITEM_TEXT_STYLE,
+        style: widget.pickerTheme?.itemTextStyle ?? DATETIME_PICKER_ITEM_TEXT_STYLE,
       ),
     );
   }
@@ -350,16 +333,15 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     _isChangeDateRange = true;
 
     List<int> monthRange = _calcMonthRange();
-    bool monthRangeChanged = _monthRange!.first != monthRange.first ||
-        _monthRange!.last != monthRange.last;
+    bool monthRangeChanged =
+        _monthRange!.first != monthRange.first || _monthRange!.last != monthRange.last;
     if (monthRangeChanged) {
       // selected year changed
       _currMonth = _calcCurrentMonth();
     }
 
     List<int> dayRange = _calcDayRange();
-    bool dayRangeChanged =
-        _dayRange!.first != dayRange.first || _dayRange!.last != dayRange.last;
+    bool dayRangeChanged = _dayRange!.first != dayRange.first || _dayRange!.last != dayRange.last;
     if (dayRangeChanged) {
       // day range changed, need limit the value of selected day
       _currDay = max(min(_currDay!, dayRange.last), dayRange.first);

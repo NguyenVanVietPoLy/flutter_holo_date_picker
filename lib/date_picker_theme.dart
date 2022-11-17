@@ -13,7 +13,7 @@ const double DATETIME_PICKER_HEIGHT = 160.0;
 const double DATETIME_PICKER_TITLE_HEIGHT = 36.0;
 
 /// Default value of DatePicker's column height.
-const double DATETIME_PICKER_ITEM_HEIGHT = 36.0;
+const double DATETIME_PICKER_ITEM_HEIGHT = 40.0;
 
 /// Default value of DatePicker's item [TextStyle].
 const TextStyle DATETIME_PICKER_ITEM_TEXT_STYLE =
